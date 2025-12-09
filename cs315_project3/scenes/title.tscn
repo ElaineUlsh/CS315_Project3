@@ -1,0 +1,113 @@
+[gd_scene load_steps=7 format=3 uid="uid://dphrafc7kqfre"]
+
+[ext_resource type="Script" uid="uid://c6xv7b0wx8m15" path="res://scenes/title.gd" id="1_p6dhs"]
+[ext_resource type="FontFile" uid="uid://dwss16o2excw6" path="res://assets/fonts/pixelFont-7-8x14-sproutLands.ttf" id="2_pyl7j"]
+[ext_resource type="Texture2D" uid="uid://c25bqqjt2aeuh" path="res://assets/Sprite sheets/UI Big Play Button.png" id="3_b3w7a"]
+[ext_resource type="AudioStream" uid="uid://0jsjott3kg3c" path="res://Menu Song.wav" id="4_pyl7j"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4rr2b"]
+atlas = ExtResource("3_b3w7a")
+region = Rect2(96, 0, 96, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yql1r"]
+atlas = ExtResource("3_b3w7a")
+region = Rect2(0, 32, 96, 32)
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_p6dhs")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 1163.0
+offset_bottom = 647.0
+color = Color(0.921569, 0.862745, 0.470588, 1)
+
+[node name="GridContainer" type="GridContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Title" type="Label" parent="GridContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_pyl7j")
+theme_override_font_sizes/font_size = 80
+text = "The Perfect Row"
+
+[node name="Label" type="Label" parent="GridContainer"]
+layout_mode = 2
+text = "
+
+
+
+"
+
+[node name="HowToPlayButton" type="Button" parent="GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_fonts/font = ExtResource("2_pyl7j")
+theme_override_font_sizes/font_size = 13
+text = "How to Play"
+icon = SubResource("AtlasTexture_4rr2b")
+icon_alignment = 1
+
+[node name="PlayButton" type="Button" parent="GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+icon = SubResource("AtlasTexture_yql1r")
+icon_alignment = 1
+
+[node name="InstructionsPopup" type="PopupPanel" parent="."]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="InstructionsPopup"]
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 289.0
+offset_bottom = 166.0
+
+[node name="Label" type="Label" parent="InstructionsPopup/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_pyl7j")
+text = "Welcome to the Perfect Row!"
+
+[node name="Label2" type="Label" parent="InstructionsPopup/VBoxContainer"]
+layout_mode = 2
+
+[node name="InstructionsText" type="Label" parent="InstructionsPopup/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_pyl7j")
+text = "- Plant seeds on tilled soil (P)
+- Water tiles to grow crops (F)
+- Harvest your produce (H)
+- Talk to other farmers (E)
+- Fix highlighted items (left-click)
+- Maintain the perfect row!"
+
+[node name="CloseButton" type="Button" parent="InstructionsPopup/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_pyl7j")
+text = "Close"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_pyl7j")
+autoplay = true
+
+[connection signal="pressed" from="GridContainer/HowToPlayButton" to="." method="_on_how_to_play_button_pressed"]
+[connection signal="pressed" from="GridContainer/PlayButton" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="InstructionsPopup/VBoxContainer/CloseButton" to="." method="_on_close_button_pressed"]

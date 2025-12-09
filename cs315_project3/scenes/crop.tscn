@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://bji3jih650aaf"]
+
+[ext_resource type="Script" uid="uid://csqttunjkntgl" path="res://scripts/crops.gd" id="1_fe780"]
+[ext_resource type="Texture2D" uid="uid://dno6fcvl1yy2r" path="res://assets/Objects/Basic Plants.png" id="2_pfmy0"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fe780"]
+atlas = ExtResource("2_pfmy0")
+
+[node name="Crop" type="Node2D"]
+script = ExtResource("1_fe780")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("AtlasTexture_fe780")
