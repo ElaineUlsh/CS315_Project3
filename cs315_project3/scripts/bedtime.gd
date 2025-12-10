@@ -45,6 +45,6 @@ func sleep():
 	## calls the sleep function in the controller after fading to black
 	AudioManager.go_to_sleep_or_plant_crop()
 	get_tree().paused = true
-	await get_tree().create_timer(1.0).timeout
+	await get_tree().create_timer(1.0, true, false, true).timeout
 	Controller.sleep()
 	get_tree().paused = false

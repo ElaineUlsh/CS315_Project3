@@ -4,6 +4,7 @@ extends Node
 var energy: int = max_energy
 var active_interactable: Node = null
 var has_shown_sleep_warning: bool = false
+var game_ended: bool = false
 
 @export var energy_drain_per_second: float = 0.5
 @export var action_energy_costs := {
@@ -27,8 +28,16 @@ signal new_day_started
 ## sets the energy to highest energy setting upon loading the game
 func _ready() -> void:
 	energy = max_energy
+	game_ended = false
 	
 func _process(delta: float) -> void:
+	if game_ended:
+		return
+	
+	if current_day >= 6:
+		end_game()
+		return
+	
 	## increments the current time
 	current_time += delta / day_length_seconds
 	
@@ -44,6 +53,13 @@ func _process(delta: float) -> void:
 	
 	if not is_night_time:
 		apply_energy_loss(int(energy_drain_per_second * delta))
+
+func end_game():
+	if game_ended:
+		return
+	
+	game_ended = true
+	DialogueManager.end_of_game()
 
 ## energy is lost with interactions, harvesting, watering, planting... really anything the player does
 func apply_energy_loss(amount: int) -> void:

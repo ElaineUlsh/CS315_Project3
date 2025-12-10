@@ -11,6 +11,7 @@ var is_ocd_message: bool = false
 signal dialogue_finished
 
 func _ready():
+	add_to_group("dialogue_box")
 	visible = false
 	if continue_button:
 		continue_button.pressed.connect(_on_continue_pressed)
@@ -42,12 +43,12 @@ func _display_next():
 	
 	if dialogue_label:
 		dialogue_label.text = message.get("text", "")
-	
+	if continue_button:
+		continue_button.visible = true
 	visible = true
 	is_showing = true
 
 func _on_continue_pressed():
-	continue_button.visible = true
 	_display_next()
 
 func _close():
